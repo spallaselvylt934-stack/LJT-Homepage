@@ -7,6 +7,8 @@ redirect_from:
   - /about.html
 ---
 
+{% include base_path %}
+
 I am a first-year PhD candidate at the **HKUST NLP Group**, Hong Kong University of Science and Technology, advised by **Professor Junxian He**. My research focuses on **natural language processing** and **machine learning**.
 
 Research Interests
@@ -70,7 +72,7 @@ My name is highlighted in **bold**.
    Jinghan Zhang, Shiqi Chen, **Junteng Liu**, Junxian He<br />
    *NeurIPS 2023*.
 
-A complete list is also available on the [Publications](/publications/) page and on my [Google Scholar profile](https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate).
+A complete list is also available on the [Publications]({{ base_path }}/publications/) page and on my [Google Scholar profile](https://scholar.google.com/citations?hl=en&user=tbK9jl4AAAAJ&view_op=list_works&sortby=pubdate).
 
 Contact
 ======
