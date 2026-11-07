@@ -5,32 +5,31 @@ permalink: /publications/
 author_profile: true
 ---
 
+{% include base_path %}
+
 {% if site.author.googlescholar %}
   <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
 {% endif %}
 
-{% include base_path %}
+<p>My name is highlighted in <strong>bold</strong>.</p>
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
+<!-- Publications are grouped by category and ordered from newest to oldest. -->
+{% for category in site.publication_category %}
+  {% assign category_publications = site.publications | where: "category", category[0] | sort: "year" | reverse %}
+  {% if category_publications.size > 0 %}
+    <h2>{{ category[1].title }}</h2><hr />
+    {% for pub in category_publications %}
+      <div class="list__item">
+        <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+          <h2 class="archive__item-title" itemprop="headline">
+            <a href="{{ base_path }}{{ pub.url }}" rel="permalink">{{ pub.title }}</a>
+          </h2>
+          <p>
+            {{ pub.authors }}<br />
+            <i>{{ pub.venue }}</i>, {{ pub.year }}{% if pub.codeurl %} &middot; <a href="{{ pub.codeurl }}">Code</a>{% endif %}
+          </p>
+        </article>
+      </div>
     {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
-
-
-
+  {% endif %}
+{% endfor %}
